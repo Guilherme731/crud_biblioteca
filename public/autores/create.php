@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label for="ano_nascimento">Ano de Nascimento:</label>
         <input type="number" name="ano_nascimento" id="ano_nascimento" required>
 
-        <input id="btnAdicionar" type="submit" value="Adicionar Autor">
+        <button type="submit">Registrar Autor</button>
 
     </form>
 
