@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <?php endwhile; ?>
                 </select>
             </div>
-        <button type="submit">Atualizar Leitor</button>
+        <button type="submit">Atualizar Livro</button>
     </form>
 
 </body>
