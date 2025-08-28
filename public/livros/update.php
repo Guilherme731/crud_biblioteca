@@ -1,6 +1,9 @@
 <?php
 include '../../config/db.php';
 
+$sqlAutores = "SELECT id_autor, nome FROM autores";
+$resultAutores = $conn->query($sqlAutores);
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $stmt = $conn->prepare("SELECT id_livro, autores.id_autor AS id_autor, livros.titulo AS nome_livros, autores.nome AS nome_autores, titulo, genero, ano_publicacao FROM livros INNER JOIN autores ON autores.id_autor = livros.id_autor WHERE livros.id_livro = ?");
@@ -49,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label for="autor">Autor:</label>
                 <select name="autor">
                     <?php while ($row = $resultAutores->fetch_assoc()): ?>
-                        <option value="<?= $row['id_autor'] ?>" <?php if(isset($_GET['id_autor'])){if($_GET['id_autor'] == $time['id_autor']){echo 'selected';}} ?>><?= $row['nome'] ?></option>
+                        <option value="<?= $row['id_autor'] ?>" <?php if($dado['id_autor'] == $row['id_autor']){echo 'selected';} ?>><?= $row['nome'] ?></option>
                     <?php endwhile; ?>
                 </select>
             </div>
