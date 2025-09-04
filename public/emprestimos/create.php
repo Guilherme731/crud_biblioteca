@@ -66,10 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </select>
             </div>
             <button type="submit">Registrar Empréstimo</button>
-
+        </form>
     </div>
 
-    </form>
+    
 
 
 </body>
