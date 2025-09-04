@@ -12,6 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $ano_publicacao = $_POST['ano_publicacao'];
     $autor = $_POST['autor'];
 
+    $anoAtual = date("Y");
+    if ($ano_publicacao <= 1500 || $ano_publicacao > $anoAtual) {
+        echo "Erro: O ano de publicação deve ser maior que 1500 e menor ou igual ao ano atual";
+        exit;
+    }
+
     $sql = " INSERT INTO livros (titulo,genero,ano_publicacao, id_autor) VALUE ('$titulo','$genero',$ano_publicacao, $autor)";
 
 

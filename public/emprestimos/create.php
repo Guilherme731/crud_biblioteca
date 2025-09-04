@@ -15,6 +15,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $livro = $_POST['livro'];
     $leitor = $_POST['leitor'];
 
+    $sqlCheckLivro = "SELECT COUNT(*) as total FROM emprestimos WHERE id_livro = $livro AND data_devolucao IS NULL";
+    $resultCheckLivro = $conn->query($sqlCheckLivro);
+    $rowCheckLivro = $resultCheckLivro->fetch_assoc();
+
+    if ($rowCheckLivro['total'] > 0) { 
+        echo "Erro: Este livro já está emprestado.";
+        exit;
+    }
+
+    if (!empty($data_devolucao) && $data_devolucao < $data_emprestimo) {
+        echo "Erro: A data de devolução não pode ser anterior à data de empréstimo.";
+        exit;
+    }
+
+    $sqlCheckLeitor = "SELECT COUNT(*) as total FROM emprestimos WHERE id_leitor = $leitor AND data_devolucao IS NULL";
+    $resultCheckLeitor = $conn->query($sqlCheckLeitor);
+    $rowCheckLeitor = $resultCheckLeitor->fetch_assoc();
+
+    if ($rowCheckLeitor['total'] >= 3) {
+        echo "Erro: Este leitor já possui 3 empréstimos ativos.";
+        exit;
+    }
+
     $sql = " INSERT INTO emprestimos (data_emprestimo, data_devolucao, id_livro, id_leitor) VALUE ('$data_emprestimo','$data_devolucao',$livro, $leitor)";
 
 
